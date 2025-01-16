@@ -417,6 +417,10 @@ cases[is.na(PopulationInCity), PopulationInCity:=knn_model$pred]
 
 cases[is.na(PopulationInCity), .N]
 
+rm(casestmp, knn_model, ModelsKnnPopulation_dt,
+   ModelsKnnPopulation, trnSet, ids, v, variables,
+   vnrm, casestmp_full)
+
 ## ZAPIS PEŁNYCH DANYCH
 
 casesFull <- copy(cases)
