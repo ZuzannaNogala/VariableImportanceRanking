@@ -6,6 +6,8 @@ library(cluster)
 library(corrplot)
 library(factoextra)
 
+## WCZYTANIE DANYCH 
+
 load("/Users/zuza/Desktop/studia/semestr7/MWM/Data_proj/casesFull.RData")
 load("/Users/zuza/Desktop/studia/semestr7/MWM/Data_proj/eventsImpFull.RData")
 
