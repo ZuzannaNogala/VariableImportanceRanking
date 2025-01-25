@@ -57,6 +57,8 @@ cases[is.na(Bailiff), .N]
 cases[is.na(ClosedExecution), .N]
 cases[is.na(ExternalAgency), .N]
 
+cases[, .N, by = .(Bailiff, ClosedExecution)]
+
 probB <- mean(cases$Bailiff, na.rm = TRUE)
 probCL <- mean(cases$ClosedExecution, na.rm = TRUE)
 probEA <- mean(cases$ExternalAgency, na.rm = TRUE)
@@ -110,12 +112,17 @@ cases[is.na(MeanSalary), .N]
 
 rm(i, probB, probCL, probEA, GDP_stats, MeanSalary_stats, problands_dt)
 
-### IsFemale - NA KOBIETĘ
+### IsFemale - NA KOBIETĘ + Age dla firm - ROZKŁAD WIEKU U KOBIET
 
 cases[,.N/nrow(cases), by = IsFemale] 
 cases[is.na(IsFemale), IsFemale := 1]
 
 cases[is.na(IsFemale), .N]
+
+AgeFemale <- cases[IsFemale == 1, Age]
+cases[Age == -1, Age := sample(AgeFemale, .N, replace = TRUE)]
+
+rm(AgeFemale)
 
 ### LoanAmount - PODZIAŁ ZE WZGLĘDU NA PRODUKT
 
@@ -423,8 +430,16 @@ rm(casestmp, knn_model, ModelsKnnPopulation_dt,
 
 ## ZAPIS PEŁNYCH DANYCH
 
+casesFull[, ClosedExecution := ifelse(ClosedExecution == 1, 0, 1)]
+casesFull[, Bailiff := ifelse(Bailiff == 1, 0, 1)]
+casesFull[, IsFemale := ifelse(IsFemale == 1, 0, 1)]
+casesFull[, IsCashLoan := ifelse(IsCashLoan == 1, 0, 1)]
+casesFull[, ExternalAgency := ifelse(ExternalAgency ==1, 0, 1)]
+
 casesFull <- copy(cases)
 eventsImpFull <- copy(events)
+
+summary(casesFull)
 
 save(casesFull, file = "/Users/zuza/Desktop/studia/semestr7/MWM/Data_proj/casesFull.RData")
 save(eventsImpFull, file = "/Users/zuza/Desktop/studia/semestr7/MWM/Data_proj/eventsImpFull.RData")
