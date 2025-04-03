@@ -60,7 +60,7 @@ The dataset includes features categorized into several groups:
 
 Based on **Pearson correlation**, the variables were grouped into four correlation baskets:
 
-![ ](/Users/zuza/Desktop/studia/semestr7/MWM/PlotsProj/CorrAllVars4.jpeg)
+![Correlation](/Users/zuza/Desktop/studia/semestr7/MWM/PlotsProj/CorrAllVars4.jpeg)
 
 ## **Ranking Rules**
 
