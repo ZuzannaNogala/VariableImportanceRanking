@@ -1,6 +1,5 @@
 ---
 output:
-  pdf_document: default
   html_document: default
 ---
 # **Ranking the Importance of Application Features in Case Success Prediction**
